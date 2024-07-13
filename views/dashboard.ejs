@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Info Form</title>
+    <link rel="stylesheet" href="/detailform.css">
+</head>
+<body>
+    <header>
+        <h1>Faculty Info</h1>
+    </header>
+    <div class="container">
+        <form class="nav-search" action="/faculty/dashboard/<%= faculty.id %>" method="POST">
+            <div class="row">
+                <div class="col-25">
+                    <label for="name">Enter your Name</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="name" name="name"  value="<%= faculty.name %>"  required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="department">Enter Department</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="department" name="department" value="<%= faculty.department%>" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="photo">Attach your image</label>
+                </div>
+                <div class="col-75">
+                    <input type="file" id="photo" name="photo">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="cabin">Enter where your cabin is located</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" pattern="[a-zA-Z0-9\s]+" id="cabin" name="cabin" value="<%= faculty.office_number %>" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="tt">Attach your timetable</label>
+                </div>
+                <div class="col-75">
+                    <input type="file" id="tt" name="tt" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="free">Enter your free slots if any</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="free" name="freeslots" value="<%= faculty.free_time %>" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25"><label for="username">Username:</label></div>
+                <div class="col-75"><input type="text" id="username" name="username" value="<%= faculty.username %>" required></div>
+            </div>
+            <div class="row">
+                <div class="col-25"><label for="password">Password:</label></div>
+                <div class="col-75"> <input type="password" id="password" name="password" value="<%= faculty.password %>" required></div>
+            </div>
+            <div class="btn">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .faculty-details {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .faculty-details p {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Faculty Details</h1>
+    <% if (faculty.length > 0) { %>
+        <% faculty.forEach(function(faculty) { %>
+            <div class="faculty-details">
+                <p><strong>Name:</strong> <%= faculty.name %></p>
+                <p><strong>Office Number:</strong> <%= faculty.office_number %></p>
+                <p><strong>Free Time:</strong> <%= faculty.free_time %></p>
+                <p><strong>Username:</strong> <%= faculty.username %></p>
+            </div>
+        <% }); %>
+    <% } else { %>
+        <p>No faculty found.</p>
+    <% } %>
+</body>
+</html>
