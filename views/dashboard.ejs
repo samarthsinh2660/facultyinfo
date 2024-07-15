@@ -11,7 +11,7 @@
         <h1>Faculty Info</h1>
     </header>
     <div class="container">
-        <form class="nav-search" action="/faculty/dashboard/<%= faculty.id %>" method="POST">
+        <form class="nav-search" action="/faculty/dashboard/<%= faculty.id %>"  enctype="multipart/form-data" method="POST">
             <div class="row">
                 <div class="col-25">
                     <label for="name">Enter your Name</label>
@@ -33,7 +33,7 @@
                     <label for="photo">Attach your image</label>
                 </div>
                 <div class="col-75">
-                    <input type="file" id="photo" name="photo">
+                    <input type="file" id="image_path" name="image_path">
                 </div>
             </div>
             <div class="row">
@@ -41,7 +41,7 @@
                     <label for="cabin">Enter where your cabin is located</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" pattern="[a-zA-Z0-9\s]+" id="cabin" name="cabin" value="<%= faculty.office_number %>" required>
+                    <input type="text" pattern="[a-zA-Z0-9\s]+" id="office_number" name="office_number" value="<%= faculty.office_number %>" required>
                 </div>
             </div>
             <div class="row">
@@ -49,7 +49,7 @@
                     <label for="tt">Attach your timetable</label>
                 </div>
                 <div class="col-75">
-                    <input type="file" id="tt" name="tt" required>
+                    <input type="file" id="pdf_path" name="pdf_path" required>
                 </div>
             </div>
             <div class="row">
@@ -57,7 +57,7 @@
                     <label for="free">Enter your free slots if any</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" id="free" name="freeslots" value="<%= faculty.free_time %>" required>
+                    <input type="text" id="free_time" name="free_time" value="<%= faculty.free_time %>" required>
                 </div>
             </div>
             <div class="row">

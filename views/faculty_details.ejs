@@ -27,17 +27,27 @@
 </head>
 <body>
     <h1>Faculty Details</h1>
-    <% if (faculty.length > 0) { %>
-        <% faculty.forEach(function(faculty) { %>
-            <div class="faculty-details">
-                <p><strong>Name:</strong> <%= faculty.name %></p>
-                <p><strong>Office Number:</strong> <%= faculty.office_number %></p>
-                <p><strong>Free Time:</strong> <%= faculty.free_time %></p>
-                <p><strong>Username:</strong> <%= faculty.username %></p>
-            </div>
-        <% }); %>
-    <% } else { %>
-        <p>No faculty found.</p>
-    <% } %>
+<% if (faculty.length > 0) { %>
+    <% faculty.forEach(function(faculty) { %>
+        <div class="faculty-details">
+            <p><strong>Name:</strong> <%= faculty.name %></p>
+            <p><strong>Office Number:</strong> <%= faculty.office_number %></p>
+            <p><strong>Free Time:</strong> <%= faculty.free_time %></p>
+            <p><strong>Username:</strong> <%= faculty.username %></p>
+
+            <% if (faculty.image_path) { %>
+                <p><strong>Image:</strong></p>
+                <img src="<%= faculty.image_path %>" alt="Faculty Image" style="max-width: 200px; max-height: 200px;">
+            <% } %>
+
+            <% if (faculty.pdf_path) { %>
+                <p><strong>PDF:</strong> <a href="<%= faculty.pdf_path %>" target="_blank">View PDF</a></p>
+            <% } %>
+        </div>
+    <% }); %>
+<% } else { %>
+    <p>No faculty found.</p>
+<% } %>
+
 </body>
 </html>
