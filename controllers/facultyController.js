@@ -7,15 +7,54 @@ exports.showDashboard = (req, res) => {
         res.render('dashboard', { faculty: results[0] });
     });
 };
+const multer = require('multer');
+const path = require('path');
 
+// Set storage engine for multer
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, './uploads/'); // Upload files to the 'uploads' directory
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }
+});
+
+// Initialize multer upload
+const upload = multer({
+    storage: storage,
+    limits: { fileSize: 5000000 }, // Limit file size if needed
+}).fields([{ name: 'pdf_path', maxCount: 1 }, { name: 'image_path', maxCount: 1 }]);
+
+// Update faculty details endpoint
 exports.updateFaculty = (req, res) => {
-    const { office_number, free_time } = req.body;
-    const query = 'UPDATE faculty SET office_number = ?, free_time = ? WHERE id = ?';
-    db.query(query, [office_number, free_time, req.params.id], (err, results) => {
-        if (err) throw err;
-        res.redirect(`/faculty/dashboard/${req.params.id}`);
+    upload(req, res, (err) => {
+        if (err) {
+            console.error('Multer error:', err);
+            // Handle error (e.g., return an error response to the client)
+            return res.status(500).json({ error: 'Error uploading files' });
+        }
+
+        // Check and log req.files
+        console.log('req.files:', req.files);
+
+        // Files uploaded successfully, continue updating database
+        const { office_number, free_time, department } = req.body;
+        const pdfPath = req.files && req.files['pdf_path'] ? '/uploads/' + req.files['pdf_path'][0].filename : null;
+        const imagePath = req.files && req.files['image_path'] ? '/uploads/' + req.files['image_path'][0].filename : null;
+
+        const query = 'UPDATE faculty SET office_number = ?, free_time = ?, department = ?, pdf_path = ?, image_path = ? WHERE id = ?';
+        db.query(query, [office_number, free_time, department, pdfPath, imagePath, req.params.id], (err, results) => {
+            if (err) {
+                console.error('Database error:', err);
+                // Handle database update error
+                return res.status(500).json({ error: 'Error updating faculty details' });
+            }
+            res.redirect(`/faculty/dashboard/${req.params.id}`);
+        });
     });
 };
+
 
 exports.showSearchPage = (req, res) => {
     res.render('index');
