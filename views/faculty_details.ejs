@@ -8,46 +8,105 @@
         body {
             font-family: Arial, sans-serif;
             padding: 20px;
-        }
-        h1 {
+            background-color: #e0e0e0; /* Soft grey background to reduce brightness */
             color: #333;
         }
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+            margin-bottom: 40px;
+        }
         .faculty-details {
+            display: flex;
+            align-items: center;
             margin-top: 20px;
             border: 1px solid #ccc;
-            padding: 10px;
-            width: 50%;
+            padding: 20px;
+            width: 60%;
             margin-left: auto;
             margin-right: auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .faculty-details:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+        .faculty-details img {
+            margin-right: 20px;
+            max-width: 150px;
+            max-height: 150px;
+            border: 2px solid #4CAF50;
+            object-fit: cover;
+        }
+        .faculty-details div {
+            flex: 1;
         }
         .faculty-details p {
             margin: 10px 0;
+            font-size: 16px;
+        }
+        .faculty-details p strong {
+            color: #4CAF50;
+        }
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: #388E3C;
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .faculty-details {
+                flex-direction: column;
+                text-align: center;
+            }
+            .faculty-details img {
+                margin: 0 auto 20px;
+            }
+        }
+        .back-button {
+            display: block;
+            width: 200px;
+            margin: 40px auto;
+            padding: 10px 20px;
+            text-align: center;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .back-button:hover {
+            background-color: #388E3C;
         }
     </style>
 </head>
 <body>
     <h1>Faculty Details</h1>
-<% if (faculty.length > 0) { %>
-    <% faculty.forEach(function(faculty) { %>
-        <div class="faculty-details">
-            <p><strong>Name:</strong> <%= faculty.name %></p>
-            <p><strong>Office Number:</strong> <%= faculty.office_number %></p>
-            <p><strong>Free Time:</strong> <%= faculty.free_time %></p>
-            <p><strong>Username:</strong> <%= faculty.username %></p>
-
-            <% if (faculty.image_path) { %>
-                <p><strong>Image:</strong></p>
-                <img src="<%= faculty.image_path %>" alt="Faculty Image" style="max-width: 200px; max-height: 200px;">
-            <% } %>
-
-            <% if (faculty.pdf_path) { %>
-                <p><strong>PDF:</strong> <a href="<%= faculty.pdf_path %>" target="_blank">View PDF</a></p>
-            <% } %>
-        </div>
-    <% }); %>
-<% } else { %>
-    <p>No faculty found.</p>
-<% } %>
-
+    <% if (faculty.length > 0) { %>
+        <% faculty.forEach(function(faculty) { %>
+            <div class="faculty-details">
+                <% if (faculty.image_path) { %>
+                    <img src="<%= faculty.image_path %>" alt="Faculty Image">
+                <% } %>
+                <div>
+                    <p><strong>Name:</strong> <%= faculty.name %></p>
+                    <p><strong>Office Number:</strong> <%= faculty.office_number %></p>
+                    <p><strong>Free Time:</strong> <%= faculty.free_time %></p>
+                    <p><strong>Username:</strong> <%= faculty.username %></p>
+                    <% if (faculty.pdf_path) { %>
+                        <p><strong>PDF:</strong> <a href="<%= faculty.pdf_path %>" target="_blank">View PDF</a></p>
+                    <% } %>
+                </div>
+            </div>
+        <% }); %>
+    <% } else { %>
+        <p>No faculty found.</p>
+    <% } %>
+    <a href="/" class="back-button">Go Back to Home</a>
 </body>
 </html>

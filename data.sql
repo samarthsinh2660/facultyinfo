@@ -1,5 +1,5 @@
 CREATE DATABASE faculty_info_db;
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'tavish99';
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Samarth@99082';
 
 -- Use the newly created database
 USE faculty_info_db;
