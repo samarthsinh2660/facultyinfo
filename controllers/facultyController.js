@@ -50,7 +50,7 @@ exports.updateFaculty = (req, res) => {
                 // Handle database update error
                 return res.status(500).json({ error: 'Error updating faculty details' });
             }
-            res.redirect(`/faculty/dashboard/${req.params.id}`);
+            res.redirect(`/auth/login`);
         });
     });
 };
