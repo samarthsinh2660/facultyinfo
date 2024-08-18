@@ -5,5 +5,5 @@ The faculty can login himself it will the previous details he can change by edit
 
 
 
-Before run that ple run npm i in your terminal
+First run npm i in your terminal
 to run the code you can nodemon app.js
